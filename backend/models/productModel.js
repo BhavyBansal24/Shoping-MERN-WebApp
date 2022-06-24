@@ -1,49 +1,49 @@
 const mongoose = require("mongoose");
-const { stringify } = require("querystring");
 
 const productSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: [true, "Please Enter Product Name"],
-        trim:true
+        trim: true
     },
     description: {
         type: String,
-        required:[true,"Please Enter Product Description"]
+        required: [true, "Please Enter Product Description"]
     },
     price: {
         type: Number,
-        required:[true,"Please Enter Product Price"], maxLength:[8,"Price cannot exceed 8 characters"]
+        required: [true, "Please Enter Product Price"],
+        maxLength: [8, "Price cannot exceed 8 characters"]
     },
     ratings: {
         type: Number,
-        default:0,
+        default: 0,
     },
     images: [
         {
             public_id: {
                 type: String,
-                required:true
+                required: true,
             },
             url: {
                 type: String,
-                required:true
-            }
-        }
+                required: true,
+            },
+        },
     ],
     category: {
         type: String,
-        required:[true, "Please Enter Product Category"]
+        required: [true, "Please Enter Product Category"],
     },
     stock: {
         type: Number,
         required: [true, "please Enter Product Stock"],
         maxLength: [4, "Stock cannot exceed 4 characters "],
-        default:1
+        default: 1
     },
     numOfReviews: {
         type: Number,
-        default:0
+        default: 0
     },
     reviews: [
         {
@@ -54,15 +54,15 @@ const productSchema = new mongoose.Schema({
             },
             name: {
                 type: String,
-                required:true,
+                required: true,
             },
             rating: {
                 type: Number,
-                required:true,
+                required: true,
             },
             comment: {
                 type: String,
-                required:true
+                required: true,
             },
         },
     ],
@@ -71,12 +71,11 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
         required: true,
-    },
-    
+    }, 
     createdAt: {
         type: Date,
-        default:Date.now
-    }
-})
+        default: Date.now,
+    },
+});
 
 module.exports = mongoose.model("Product", productSchema);
